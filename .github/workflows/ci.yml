@@ -1,0 +1,41 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - "*"
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy-web:
+    if: github.ref == 'refs/heads/main' && github.repository_owner == 'ia-toki'
+    runs-on: ubuntu-22.04
+    env:
+      HOST: ${{ secrets.HOST }}
+      KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 50
+
+      - name: Set up node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Build
+        run: |
+          yarn install
+          yarn build
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.PRIVATE_KEY }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+      - name: Rsync
+        run: rsync -avzh build/ root@${HOST}:/var/www/html/panduan --delete
