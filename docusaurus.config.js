@@ -73,6 +73,10 @@ const config = {
           },
         ],
       },
+      colorMode: {
+        defaultMode: 'light',
+        disableSwitch: true,
+      },
       footer: {
         style: 'dark',
         copyright: `Copyright © ${new Date().getFullYear()} Ikatan Alumni TOKI. Built with Docusaurus.`,
