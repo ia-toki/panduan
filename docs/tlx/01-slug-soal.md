@@ -1,6 +1,5 @@
 # Panduan Membuat Slug Soal
 
-
 Setiap soal pada TLX memiliki sebuah *identifier* (pengenal) berupa sebuah string yang disebut *slug*, yang harus berbeda-beda. Biasanya, slug dibentuk dari judul soal, misalnya `tebak-angka`.
 
 Saat ini terdapat banyak kontes pada TLX. Mungkin saja ada dua soal dari dua kontes berbeda yang memiliki judul yang sama. Sebagai contoh, `Tebak Angka` adalah judul soal yang lumayan umum. Menggunakan `tebak-angka` sebagai slug tentu bukanlah ide yang baik.
